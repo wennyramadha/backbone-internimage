@@ -11,5 +11,5 @@ from .gta import GTADataset
 
 
 __all__ = [
-    'MapillaryDataset', 'NYUDepthV2Dataset', 'ConcatDataset', 'CityscapesDataset', 'GTADataset'
+    'MapillaryDataset', 'NYUDepthV2Dataset', 'ConcatDataset', 'CityscapesDataset', 'GTADataset',
 ]
