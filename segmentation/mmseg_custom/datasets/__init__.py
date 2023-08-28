@@ -21,7 +21,6 @@ __all__ = [
     'MapillaryDataset',
     'NYUDepthV2Dataset',
     'ConcatDataset',
-    'RepeatDataset',
     'CityscapesDataset',
     'GTADataset',
 ]
