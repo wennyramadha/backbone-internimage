@@ -7,6 +7,8 @@
 from . import CityscapesDataset
 from .builder import DATASETS
 from .custom import CustomDataset
+from mmseg.datasets.builder import DATASETS
+from mmseg.datasets.custom import CustomDataset
 
 
 @DATASETS.register_module()
