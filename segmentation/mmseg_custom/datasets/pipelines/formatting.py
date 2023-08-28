@@ -10,7 +10,7 @@ from mmcv.parallel import DataContainer as DC
 from mmseg.datasets.builder import PIPELINES
 from mmseg.datasets.pipelines.formatting import to_tensor
 
-from ..builder import PIPELINES
+# from ..builder import PIPELINES
 
 def to_tensor(data):
     """Convert objects of various python types to :obj:`torch.Tensor`.
