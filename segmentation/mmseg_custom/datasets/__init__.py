@@ -1,6 +1,7 @@
-#Wenny add GTADatasets
-# -------------------------------------------------
+# Wenny add cityscapes and gta dataset
+# -------------------------------------------------------------------
 # Copyright (c) OpenMMLab. All rights reserved.
+
 from .mapillary import MapillaryDataset  # noqa: F401,F403
 from .nyu_depth_v2 import NYUDepthV2Dataset  # noqa: F401,F403
 from .pipelines import *  # noqa: F401,F403
@@ -10,9 +11,5 @@ from .gta import GTADataset
 
 
 __all__ = [
-    'MapillaryDataset', 
-    'NYUDepthV2Dataset', 
-    'ConcatDataset', 
-    'CityscapesDataset',
-    'GTADataset',
+    'MapillaryDataset', 'NYUDepthV2Dataset', 'ConcatDataset', 'CityscapesDataset', 'GTADataset'
 ]

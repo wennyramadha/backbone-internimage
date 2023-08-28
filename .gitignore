@@ -4,3 +4,6 @@
 __pycache__/
 classification/convertor/
 segmentation/convertor/
+segmentation/data/*
+segmentation/ops_dcnv3/*
+segmentation/work_dirs/*
