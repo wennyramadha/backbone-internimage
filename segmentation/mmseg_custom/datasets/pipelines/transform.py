@@ -8,6 +8,7 @@
 import mmcv
 import numpy as np
 from mmseg.datasets.builder import PIPELINES
+from mmcv.utils import deprecated_api_warning, is_tuple_of
 from ..builder import PIPELINES
 
 @PIPELINES.register_module()
