@@ -8,30 +8,25 @@ _base_ = [
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_20k.py'
 ]
 num_classes = 150
-load_from = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_t_1k_224.pth'
+pretrained = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_t_1k_224.pth'
 model = dict(
     type='EncoderDecoderMask2Former',
     backbone=dict(
         _delete_=True,
         type='InternImage',
         core_op='DCNv3',
-        channels=320,
-        depths=[6, 6, 32, 6],
-        groups=[10, 20, 40, 80],
+        channels=64,
+        depths=[4, 4, 18, 4],
+        groups=[4, 8, 16, 32],
         mlp_ratio=4.,
-        drop_path_rate=0.5,
+        drop_path_rate=0.2,
         norm_layer='LN',
-        layer_scale=None,
+        layer_scale=1.0,
         offset_scale=1.0,
         post_norm=False,
-        dw_kernel_size=5, # for InternImage-H/G
-        res_post_norm=True, # for InternImage-H/G
-        level2_post_norm=True, # for InternImage-H/G
-        level2_post_norm_block_ids=[5, 11, 17, 23, 29], # for InternImage-H/G
-        center_feature_scale=True, # for InternImage-H/G
         with_cp=False,
         out_indices=(0, 1, 2, 3),
-        init_cfg=None),
+        init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     decode_head=dict(
         in_channels=[320, 640, 1280, 2560],
         feat_channels=1024,
