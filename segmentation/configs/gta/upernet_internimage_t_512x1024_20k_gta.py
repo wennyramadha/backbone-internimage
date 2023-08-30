@@ -23,7 +23,7 @@ model = dict(
         layer_scale=1.0,
         offset_scale=1.0,
         post_norm=False,
-        with_cp=False,
+        with_cp=True,
         out_indices=(0, 1, 2, 3),
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     decode_head=dict(num_classes=150, in_channels=[64, 128, 256, 512]),
