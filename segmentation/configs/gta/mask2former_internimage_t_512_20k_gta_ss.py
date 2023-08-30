@@ -25,7 +25,7 @@ model = dict(
         layer_scale=1.0,
         offset_scale=1.0,
         post_norm=False,
-        with_cp=False,
+        with_cp=True,
         out_indices=(0, 1, 2, 3),
         init_cfg=dict(type='Pretrained', checkpoint=pretrained)),
     decode_head=dict(
@@ -61,7 +61,7 @@ model = dict(
                         feedforward_channels=4096,
                         num_fcs=2,
                         ffn_drop=0.0,
-                        with_cp=False,  # set with_cp=True to save memory
+                        with_cp=True,  # set with_cp=True to save memory
                         act_cfg=dict(type='ReLU', inplace=True)),
                     operation_order=('self_attn', 'norm', 'ffn', 'norm')),
                 init_cfg=None),
@@ -148,7 +148,7 @@ lr_config = dict(_delete_=True, policy='poly',
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 16 GPUs with 1 images per GPU
-data = dict(samples_per_gpu=1,
+data = dict(samples_per_gpu=1, workers_per_gpu=1,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))
