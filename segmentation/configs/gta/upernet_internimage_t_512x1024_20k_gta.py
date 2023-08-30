@@ -7,7 +7,8 @@ _base_ = [
     '../_base_/models/upernet_r50.py', '../_base_/datasets/gta_to_cityscapes_512x512.py',
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_20k.py'
 ]
-pretrained = 'https://huggingface.co/OpenGVLab/InternImage/resolve/main/internimage_t_1k_224.pth'
+# pretrained = 'https://huggingface.co/OpenGVLab/InternImage/resolve/main/internimage_t_1k_224.pth'
+pretrained = '/data/wenny/backbone-internimage/segmentation/ckpt/internimage_t_1k_224.pth'
 model = dict(
     backbone=dict(
         _delete_=True,
