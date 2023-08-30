@@ -8,7 +8,8 @@ _base_ = [
     '../_base_/default_runtime.py', '../_base_/schedules/schedule_20k.py'
 ]
 num_classes = 150
-pretrained = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_t_1k_224.pth'
+#pretrained = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_t_1k_224.pth'
+pretrained = '/data/wenny/backbone-internimage/segmentation/ckpt/internimage_t_1k_224.pth'
 model = dict(
     type='EncoderDecoderMask2Former',
     backbone=dict(
@@ -90,7 +91,7 @@ model = dict(
                     act_cfg=dict(type='ReLU', inplace=True),
                     ffn_drop=0.0,
                     dropout_layer=None,
-                    with_cp=False,  # set with_cp=True to save memory
+                    with_cp=True,  # set with_cp=True to save memory
                     add_identity=True),
                 feedforward_channels=4096,
                 operation_order=('cross_attn', 'norm', 'self_attn', 'norm',
