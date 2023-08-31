@@ -148,7 +148,7 @@ lr_config = dict(_delete_=True, policy='poly',
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 16 GPUs with 1 images per GPU
-data = dict(samples_per_gpu=1, workers_per_gpu=1,
+data = dict(samples_per_gpu=1, workers_per_gpu=0,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))

@@ -27,6 +27,7 @@ from mmseg.utils import (collect_env, get_device, get_root_logger,
 import mmcv_custom  # noqa: F401,F403
 import mmseg_custom  # noqa: F401,F403
 
+# import deepspeed
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a segmentor')
@@ -96,6 +97,10 @@ def parse_args():
         '--auto-resume',
         action='store_true',
         help='resume from the latest checkpoint automatically.')
+
+    ##Add argument for deepspeed configuration
+    # parser = deepspeed.add_config_arguments(parser)
+
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
