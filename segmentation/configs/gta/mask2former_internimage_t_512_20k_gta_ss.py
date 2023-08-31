@@ -5,7 +5,7 @@
 # --------------------------------------------------------
 _base_ = [
     '../_base_/models/mask2former_beit.py', '../_base_/datasets/gta_test_on_city_train_512x512.py',
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_160k.py'
+    '../_base_/default_runtime.py', '../_base_/schedules/schedule_20k.py'
 ]
 num_classes = 150
 #pretrained = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_t_1k_224.pth'
@@ -148,12 +148,12 @@ lr_config = dict(_delete_=True, policy='poly',
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 16 GPUs with 1 images per GPU
-data = dict(samples_per_gpu=2, workers_per_gpu=1,
+data = dict(samples_per_gpu=1, workers_per_gpu=1,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')
 optimizer_config = dict(_delete_=True, grad_clip=dict(max_norm=0.1, norm_type=2))
 checkpoint_config = dict(by_epoch=False, interval=1000, max_keep_ckpts=1)
-evaluation = dict(interval=16000, metric='mIoU', save_best='mIoU')
+evaluation = dict(interval=2000, metric='mIoU', save_best='mIoU')
 # fp16 = dict(loss_scale=dict(init_scale=512))
