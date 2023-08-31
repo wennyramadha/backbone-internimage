@@ -4,8 +4,8 @@
 # Licensed under The MIT License [see LICENSE for details]
 # --------------------------------------------------------
 _base_ = [
-    '../_base_/models/mask2former_beit.py', '../_base_/datasets/gta_to_cityscapes_512x512.py',
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_20k.py'
+    '../_base_/models/mask2former_beit.py', '../_base_/datasets/gta_test_on_city_train_512x512.py',
+    '../_base_/default_runtime.py', '../_base_/schedules/schedule_160k.py'
 ]
 num_classes = 150
 load_from = 'https://huggingface.co/OpenGVLab/InternImage/blob/main/internimage_h_22kto1k_640.pth'
@@ -29,7 +29,7 @@ model = dict(
         level2_post_norm=True, # for InternImage-H/G
         level2_post_norm_block_ids=[5, 11, 17, 23, 29], # for InternImage-H/G
         center_feature_scale=True, # for InternImage-H/G
-        with_cp=False,
+        with_cp=True,
         out_indices=(0, 1, 2, 3),
         init_cfg=None),
     decode_head=dict(
@@ -65,7 +65,7 @@ model = dict(
                         feedforward_channels=4096,
                         num_fcs=2,
                         ffn_drop=0.0,
-                        with_cp=False,  # set with_cp=True to save memory
+                        with_cp=True,  # set with_cp=True to save memory
                         act_cfg=dict(type='ReLU', inplace=True)),
                     operation_order=('self_attn', 'norm', 'ffn', 'norm')),
                 init_cfg=None),
@@ -95,7 +95,7 @@ model = dict(
                     act_cfg=dict(type='ReLU', inplace=True),
                     ffn_drop=0.0,
                     dropout_layer=None,
-                    with_cp=False,  # set with_cp=True to save memory
+                    with_cp=True,  # set with_cp=True to save memory
                     add_identity=True),
                 feedforward_channels=4096,
                 operation_order=('cross_attn', 'norm', 'self_attn', 'norm',
@@ -152,12 +152,12 @@ lr_config = dict(_delete_=True, policy='poly',
                  warmup_ratio=1e-6,
                  power=1.0, min_lr=0.0, by_epoch=False)
 # By default, models are trained on 16 GPUs with 1 images per GPU
-data = dict(samples_per_gpu=1,
+data = dict(samples_per_gpu=2, workers_per_gpu=1,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
             test=dict(pipeline=test_pipeline))
 runner = dict(type='IterBasedRunner')
 optimizer_config = dict(_delete_=True, grad_clip=dict(max_norm=0.1, norm_type=2))
 checkpoint_config = dict(by_epoch=False, interval=1000, max_keep_ckpts=1)
-evaluation = dict(interval=2000, metric='mIoU', save_best='mIoU')
+evaluation = dict(interval=16000, metric='mIoU', save_best='mIoU')
 # fp16 = dict(loss_scale=dict(init_scale=512))
